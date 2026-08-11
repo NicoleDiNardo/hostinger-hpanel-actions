@@ -204,7 +204,7 @@ async function main() {
     }
 
     const multi = card('Multi-site rule', [
-      'Group Action Centre rows by site/product. The Home critical strip picks the highest-severity active item across sites and always names the affected property (“Affects rocketman.xyz”).',
+      'Group Action Centre rows by site/product. Home lists all Critical (P0) actions across sites and always names the affected property (“Affects rocketman.xyz”).',
     ], 1004);
     multi.layoutAlign = 'STRETCH';
     f.appendChild(multi);
@@ -335,7 +335,7 @@ async function main() {
       card('Tradeoffs', [
         '• Page over drawer — multi-site triage needs room',
         '• “Actions” over “Notifications” — renew / restore / grant',
-        '• Max one Home interrupt — fixes urgency inflation',
+        '• All Criticals on Home — no artificial 1-item cap',
         '• Offers quarantined — never on Home or Critical',
       ], 494)
     );
@@ -350,7 +350,7 @@ async function main() {
     f.appendChild(row);
 
     const ai = card('AI in the process', [
-      'Used AI to accelerate structure, priority mapping, and prototype scaffolding. Decisions to defend in interview: naming (“Actions”), the P0 Home cap, multi-site grouping, and excluding offers from Home.',
+      'Used AI to accelerate structure, priority mapping, and prototype scaffolding. Decisions to defend in interview: naming (“Actions”), listing all Criticals on Home (no 1-item cap), multi-site grouping, and excluding offers from Home.',
     ], 1004);
     ai.layoutAlign = 'STRETCH';
     f.appendChild(ai);

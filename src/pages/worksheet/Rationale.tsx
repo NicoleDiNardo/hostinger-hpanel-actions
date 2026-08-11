@@ -24,8 +24,8 @@ export function WorksheetRationale() {
               restore / grant, not “mark as read”.
             </li>
             <li>
-              <strong>Max one Home interrupt</strong> — harsh but necessary to fix urgency
-              inflation; everything else earns a visit to the centre.
+              <strong>All Criticals on Home</strong> — no artificial 1-item cap; every P0
+              lists on Home, everything else earns a visit to the centre.
             </li>
             <li>
               <strong>Offers quarantined</strong> — never on Home, never in Critical filter.
@@ -47,9 +47,10 @@ export function WorksheetRationale() {
         <h2>AI in the process</h2>
         <p>
           Used AI to accelerate structure, priority mapping, and prototype scaffolding.
-          Decisions that remain mine to defend in interview: naming (“Actions”), the P0
-          Home cap, multi-site grouping, and excluding offers from Home — because those
-          directly address the brief’s conversion and fold problems.
+          Decisions that remain mine to defend in interview: naming (“Actions”), listing
+          all Criticals on Home (no 1-item cap), multi-site grouping, and excluding
+          offers from Home — because those directly address the brief’s conversion and
+          fold problems.
         </p>
       </section>
 

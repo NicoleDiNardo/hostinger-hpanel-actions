@@ -36,7 +36,7 @@ export function WorksheetFlows() {
           <ol>
             <li>Snooze an item (out of Open actions)</li>
             <li>Filter Offers (never on Home / badge)</li>
-            <li>Focus one site (rocketman)</li>
+            <li>Focus one site (studio-bloom.com)</li>
             <li>Badge stays global open count</li>
           </ol>
         </section>

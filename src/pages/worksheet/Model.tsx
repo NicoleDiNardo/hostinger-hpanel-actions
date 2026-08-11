@@ -52,9 +52,8 @@ export function WorksheetModel() {
       <section className={styles.card}>
         <h2>Multi-site rule</h2>
         <p>
-          Group Action Centre rows by site/product. The Home critical strip picks the
-          highest-severity active item across sites and always names the affected
-          property (“Affects rocketman.xyz”).
+          Group Action Centre rows by site/product. Home lists all Critical (P0) actions
+          across sites and always names the affected property (“Affects rocketman.xyz”).
         </p>
       </section>
 

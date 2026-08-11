@@ -3,6 +3,38 @@ import { useActions } from '../context/ActionsContext'
 import { PriorityStrip } from '../components/actions/PriorityStrip'
 import styles from './Home.module.css'
 
+function siteChipStatus(
+  site: string,
+  criticalHomeActions: ReturnType<typeof useActions>['criticalHomeActions'],
+  activeActions: ReturnType<typeof useActions>['activeActions'],
+) {
+  const siteCriticals = criticalHomeActions.filter((a) => a.site === site)
+  const siteOpen = activeActions.filter(
+    (a) => a.site === site && a.tier !== 'P4',
+  ).length
+
+  if (site === 'rocketman.xyz') {
+    if (siteCriticals.length >= 2) {
+      return '2 Critical actions · hosting cancelled + domain expired'
+    }
+    if (siteCriticals.length === 1) {
+      return 'Domain expired · renew needed'
+    }
+  } else if (siteCriticals.length > 0) {
+    return siteCriticals.length === 1
+      ? '1 Critical · open Actions'
+      : `${siteCriticals.length} Critical · open Actions`
+  }
+
+  if (siteOpen > 0) {
+    return siteOpen === 1
+      ? 'No Criticals · 1 open in Actions'
+      : `No Criticals · ${siteOpen} open in Actions`
+  }
+
+  return 'All clear · no open actions'
+}
+
 export function Home() {
   const { criticalHomeActions, badgeCount, activeActions, actions } =
     useActions()
@@ -12,20 +44,21 @@ export function Home() {
     (a) =>
       a.nudgeType === 'hosting_plan_cancelled' && a.status === 'dismissed',
   )
+  const accessOnly =
+    badgeCount > 0 &&
+    criticalCount === 0 &&
+    activeActions.some((a) => a.tier === 'P3')
 
-  const rocketCritical = criticalHomeActions.filter(
-    (a) => a.site === 'rocketman.xyz',
-  ).length
-
-  let rocketStatus = 'All clear · no open actions'
-  if (rocketCritical >= 2) {
-    rocketStatus = '2 Critical actions · hosting cancelled + domain expired'
-  } else if (rocketCritical === 1) {
-    rocketStatus = 'Domain expired · renew needed'
-  }
-
-  // Match Figma A1: studio-bloom shows All clear on Home even with AC open items
-  const studioStatus = 'All clear · no open actions'
+  const rocketStatus = siteChipStatus(
+    'rocketman.xyz',
+    criticalHomeActions,
+    activeActions,
+  )
+  const studioStatus = siteChipStatus(
+    'studio-bloom.com',
+    criticalHomeActions,
+    activeActions,
+  )
 
   let summaryTitle = 'Actions · all clear'
   let summaryHint = 'Nothing needs you right now'
@@ -33,15 +66,19 @@ export function Home() {
 
   if (badgeCount > 0) {
     summaryTitle = `Actions · ${badgeCount} open`
-    pageSubtitle = 'Your websites first · Critical actions list on Home'
     if (criticalCount > 0) {
+      pageSubtitle = 'Your websites first · Critical actions list on Home'
       summaryHint =
         criticalCount === 1 && hostingRestored
           ? '1 critical remaining on Home · domain expired'
           : criticalCount === 1
             ? '1 Critical on Home · open Action Centre for the rest'
             : `${criticalCount} Critical on Home · open Action Centre for the rest`
+    } else if (accessOnly) {
+      pageSubtitle = 'No Critical actions on Home · access waiting in Actions'
+      summaryHint = 'Access request waiting · open Actions to grant or reject'
     } else {
+      pageSubtitle = 'No Critical actions on Home · triage in Actions'
       summaryHint = 'Open Action Centre to triage'
     }
   }
