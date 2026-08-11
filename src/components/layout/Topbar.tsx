@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import { useActions } from '../../context/ActionsContext'
 import styles from './Topbar.module.css'
 
