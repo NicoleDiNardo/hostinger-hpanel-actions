@@ -1,0 +1,45 @@
+.avatar {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+
+.glyph {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.p0 {
+  background: #ffe8ef;
+}
+
+.p1 {
+  background: #fff8e2;
+}
+
+.p2 {
+  background: #e5f3fc;
+}
+
+.p3 {
+  background: #f4f5ff;
+}
+
+.p4 {
+  background: #dadce0;
+}

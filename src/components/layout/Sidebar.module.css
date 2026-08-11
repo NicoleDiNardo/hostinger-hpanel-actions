@@ -1,0 +1,176 @@
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--white);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  position: sticky;
+  top: var(--topbar-h);
+  align-self: flex-start;
+  height: calc(100vh - var(--topbar-h));
+  height: calc(100dvh - var(--topbar-h));
+  flex-shrink: 0;
+  z-index: 30;
+}
+
+.mobileHeader {
+  display: none;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.navLink,
+.navDisabled,
+.worksheetLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #18181a;
+  min-height: 48px;
+}
+
+.navLink:hover,
+.worksheetLink:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.navLink.active,
+.worksheetLink.active {
+  background: rgba(0, 0, 0, 0.05);
+  font-weight: 700;
+}
+
+.navDisabled {
+  color: #18181a;
+  cursor: default;
+  opacity: 0.55;
+}
+
+.badge {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 9px;
+  background: #fc5185;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.footer {
+  padding: 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resetMobile {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #dadce0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #673de6;
+}
+
+.worksheet {
+  padding: 12px 12px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.worksheetLabel {
+  margin: 0 0 8px;
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6d7081;
+}
+
+.worksheetLink {
+  font-size: 13px;
+}
+
+.closeBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+}
+
+.closeBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.closeBtn img {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.mobileTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    top: var(--topbar-h);
+    left: 0;
+    bottom: 0;
+    height: auto;
+    width: min(320px, 86vw);
+    transform: translateX(-105%);
+    transition: transform 0.22s ease;
+    box-shadow: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 8px 0 24px rgba(29, 30, 32, 0.16);
+  }
+
+  .mobileHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 8px 8px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+  }
+
+  .resetMobile {
+    display: inline-flex;
+  }
+}

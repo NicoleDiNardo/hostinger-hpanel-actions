@@ -1,0 +1,246 @@
+.board {
+  max-width: 960px;
+}
+
+.kicker {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple-600);
+}
+
+.board h1 {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.deck {
+  margin: 12px 0 28px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--gray-700);
+  max-width: 720px;
+}
+
+.grid3,
+.grid2,
+.flowGrid,
+.compare {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.grid3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid2,
+.compare {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.flowGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card,
+.flowCard,
+.comparePane {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.card h2,
+.flowCard h2,
+.comparePane h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.card ul,
+.flowCard ol,
+.comparePane ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--gray-700);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.card p,
+.flowCard p {
+  margin: 0;
+  color: var(--gray-700);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.principles {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--gray-700);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.tierTable {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tierRow {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+
+.tierRow.P0 {
+  border-left-color: var(--pink-600);
+}
+.tierRow.P1 {
+  border-left-color: var(--yellow-600);
+}
+.tierRow.P2 {
+  border-left-color: var(--blue-600);
+}
+.tierRow.P3 {
+  border-left-color: var(--purple-600);
+}
+.tierRow.P4 {
+  border-left-color: var(--gray-500);
+}
+
+.tierHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.tierHead h2 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.tierHead p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--gray-700);
+}
+
+.tierBadge {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--gray-100);
+}
+
+.nudgeCount {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray-500);
+}
+
+.nudgeChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.nudgeChips code,
+.board code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background: var(--gray-100);
+  color: var(--gray-700);
+}
+
+.next {
+  margin: 28px 0 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: 700;
+  color: var(--purple-600);
+}
+
+.mockBefore,
+.mockAfter {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  background: var(--gray-100);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mockLine {
+  height: 14px;
+  width: 40%;
+  border-radius: 4px;
+  background: var(--gray-300);
+}
+
+.mockCard {
+  height: 28px;
+  border-radius: 6px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+}
+
+.mockStrip {
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ffe8f0, #fff);
+  border: 1px solid #ffd0df;
+}
+
+.mockSites {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.mockSites span {
+  height: 48px;
+  border-radius: 8px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+}
+
+.mockCaption {
+  margin: 4px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+@media (max-width: 900px) {
+  .grid3,
+  .grid2,
+  .flowGrid,
+  .compare {
+    grid-template-columns: 1fr;
+  }
+}

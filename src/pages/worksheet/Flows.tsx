@@ -1,0 +1,60 @@
+import { Link } from 'react-router-dom'
+import styles from '../Worksheet.module.css'
+
+export function WorksheetFlows() {
+  return (
+    <article className={styles.board}>
+      <p className={styles.kicker}>03 · Flows</p>
+      <h1>Core journeys</h1>
+      <p className={styles.deck}>
+        Three paths prove the system: clear Criticals, handle Access without
+        interrupting Home, and use triage tools (snooze / filters / site focus).
+      </p>
+
+      <div className={styles.flowGrid}>
+        <section className={styles.flowCard}>
+          <h2>A · Clear Criticals</h2>
+          <ol>
+            <li>Home After — sites first + P0 Criticals</li>
+            <li>Open Action Centre (All open)</li>
+            <li>Restore hosting → toast on Home</li>
+            <li>Action Centre updates (hosting row gone)</li>
+            <li>Clear remaining → Empty Home + Empty AC</li>
+          </ol>
+        </section>
+        <section className={styles.flowCard}>
+          <h2>B · Access (P3)</h2>
+          <ol>
+            <li>Home shows no Critical strip (Access counted in badge only)</li>
+            <li>Open Actions → Access filter</li>
+            <li>Grant / Reject</li>
+            <li>Empty Action Centre</li>
+          </ol>
+        </section>
+        <section className={styles.flowCard}>
+          <h2>C · Triage tools</h2>
+          <ol>
+            <li>Snooze an item (out of Open actions)</li>
+            <li>Filter Offers (never on Home / badge)</li>
+            <li>Focus one site (rocketman)</li>
+            <li>Badge stays global open count</li>
+          </ol>
+        </section>
+      </div>
+
+      <section className={styles.card}>
+        <h2>Try it in the prototype</h2>
+        <p>
+          Open <Link to="/">Home</Link>, then <Link to="/actions">Actions</Link>.
+          Dismiss or snooze items and watch the badge update. Use <strong>Reset demo</strong> in
+          the top bar anytime.
+        </p>
+      </section>
+
+      <p className={styles.next}>
+        <Link to="/worksheet/model">← Model</Link>
+        <Link to="/worksheet/ui">04 UI →</Link>
+      </p>
+    </article>
+  )
+}
