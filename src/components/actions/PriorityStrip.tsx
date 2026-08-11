@@ -35,6 +35,7 @@ export function PriorityStrip({ action }: Props) {
           type="button"
           className={styles.dismiss}
           aria-label="Dismiss"
+          data-tooltip="Dismiss"
           onClick={() => dismiss(action.id)}
         >
           <img src="/icons/cross.svg" alt="" width={16} height={16} />

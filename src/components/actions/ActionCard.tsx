@@ -60,8 +60,8 @@ export function ActionCard({ action }: Props) {
         <button
           type="button"
           className={styles.dismiss}
-          aria-label={isEmail ? 'Snooze' : 'Dismiss'}
-          title={isEmail ? 'Snooze for 7 days' : 'Dismiss'}
+          aria-label={isEmail ? 'Snooze for 7 days' : 'Dismiss'}
+          data-tooltip={isEmail ? 'Snooze for 7 days' : 'Dismiss'}
           onClick={() => (isEmail ? snooze(action.id) : dismiss(action.id))}
         >
           <img src="/icons/cross.svg" alt="" width={16} height={16} />
