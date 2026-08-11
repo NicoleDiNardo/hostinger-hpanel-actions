@@ -59,9 +59,23 @@ export function Topbar({ menuOpen = false, onMenuToggle }: Props) {
           Reset demo
         </button>
         <button type="button" className={styles.refer}>
+          <img
+            className={styles.referIcon}
+            src="/icons/refer.svg"
+            alt=""
+            width={16}
+            height={16}
+          />
           Refer &amp; earn up to $200
         </button>
         <button type="button" className={styles.ai}>
+          <img
+            className={styles.aiIcon}
+            src="/icons/ask-ai.svg"
+            alt=""
+            width={20}
+            height={20}
+          />
           <span className={styles.aiLabel}>Ask AI</span>
         </button>
         <button type="button" className={styles.avatarBtn} aria-label="Account">

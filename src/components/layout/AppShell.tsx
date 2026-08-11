@@ -39,28 +39,26 @@ export function AppShell() {
 
   return (
     <div className={styles.shell}>
-      <Topbar
-        menuOpen={menuOpen}
-        onMenuToggle={() => setMenuOpen((open) => !open)}
+      <Sidebar
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        hidden={drawerHidden}
       />
-      <div className={styles.body}>
-        <Sidebar
-          open={menuOpen}
-          onClose={() => setMenuOpen(false)}
-          hidden={drawerHidden}
+      {menuOpen && isMobile ? (
+        <button
+          type="button"
+          className={styles.backdrop}
+          aria-label="Close menu"
+          onClick={() => setMenuOpen(false)}
         />
-        {menuOpen && isMobile ? (
-          <button
-            type="button"
-            className={styles.backdrop}
-            aria-label="Close menu"
-            onClick={() => setMenuOpen(false)}
-          />
-        ) : null}
-        <div className={styles.main}>
-          <div className={styles.content}>
-            <Outlet />
-          </div>
+      ) : null}
+      <div className={styles.main}>
+        <Topbar
+          menuOpen={menuOpen}
+          onMenuToggle={() => setMenuOpen((open) => !open)}
+        />
+        <div className={styles.content}>
+          <Outlet />
         </div>
       </div>
       <Toast />

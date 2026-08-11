@@ -31,8 +31,8 @@
 .flowGrid,
 .compare {
   display: grid;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 24px;
+  margin-bottom: 24px;
 }
 
 .grid3 {
@@ -42,6 +42,8 @@
 .grid2,
 .compare {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 24px;
 }
 
 .flowGrid {
@@ -56,6 +58,14 @@
   border-radius: var(--radius-lg);
   padding: 20px;
   box-shadow: var(--shadow-card);
+}
+
+.board > .card {
+  margin-bottom: 24px;
+}
+
+.board > .card:last-of-type {
+  margin-bottom: 0;
 }
 
 .card h2,

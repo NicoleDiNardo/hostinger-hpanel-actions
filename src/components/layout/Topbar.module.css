@@ -148,7 +148,17 @@
   font-weight: 400;
   font-size: 14px;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   transition: background 0.15s ease;
+}
+
+.referIcon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
 }
 
 .refer:hover {
@@ -164,7 +174,17 @@
   font-weight: 600;
   font-size: 14px;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   transition: background 0.15s ease;
+}
+
+.aiIcon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
 }
 
 .ai:hover {
@@ -173,6 +193,7 @@
 
 .aiLabel {
   display: inline;
+  padding: 0 4px;
 }
 
 .avatarBtn {

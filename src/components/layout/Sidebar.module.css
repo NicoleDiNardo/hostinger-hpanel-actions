@@ -6,10 +6,10 @@
   flex-direction: column;
   padding: 0;
   position: sticky;
-  top: var(--topbar-h);
+  top: 0;
   align-self: flex-start;
-  height: calc(100vh - var(--topbar-h));
-  height: calc(100dvh - var(--topbar-h));
+  height: 100vh;
+  height: 100dvh;
   flex-shrink: 0;
   z-index: 30;
 }
@@ -144,10 +144,10 @@
 @media (max-width: 900px) {
   .sidebar {
     position: fixed;
-    top: var(--topbar-h);
+    top: 0;
     left: 0;
     bottom: 0;
-    height: auto;
+    height: 100dvh;
     width: min(320px, 86vw);
     transform: translateX(-105%);
     transition: transform 0.22s ease;
