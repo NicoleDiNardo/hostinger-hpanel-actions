@@ -2,18 +2,39 @@ import { NavLink } from 'react-router-dom'
 import { useActions } from '../../context/ActionsContext'
 import styles from './Sidebar.module.css'
 
-const NAV = [
-  { to: '/', label: 'Home', end: true },
-  { to: '/websites', label: 'Websites', disabled: true },
-  { to: '/domains', label: 'Domains', disabled: true },
-  { to: '/horizons', label: 'Horizons', disabled: true },
-  { to: '/emails', label: 'Emails', disabled: true },
-  { to: '/actions', label: 'Actions' },
-  { to: '/reach', label: 'Reach', disabled: true },
-  { to: '/vps', label: 'VPS', disabled: true },
-  { to: '/dark-web', label: 'Dark web monitoring', disabled: true },
-  { to: '/billing', label: 'Billing', disabled: true },
-  { to: '/marketplace', label: 'Marketplace', disabled: true },
+type NavItem = {
+  to?: string
+  label: string
+  icon: string
+  end?: boolean
+  disabled?: boolean
+  chevron?: boolean
+  badge?: boolean
+}
+
+const NAV: NavItem[] = [
+  { to: '/', label: 'Home', icon: 'nav-home', end: true },
+  { to: '/websites', label: 'Websites', icon: 'nav-websites', disabled: true, chevron: true },
+  { to: '/domains', label: 'Domains', icon: 'nav-domains', disabled: true, chevron: true },
+  { to: '/horizons', label: 'Horizons', icon: 'nav-horizons', disabled: true },
+  { to: '/emails', label: 'Emails', icon: 'nav-emails', disabled: true },
+  { to: '/actions', label: 'Actions', icon: 'nav-actions', badge: true },
+  { to: '/reach', label: 'Reach', icon: 'nav-reach', disabled: true },
+  { to: '/vps', label: 'VPS', icon: 'nav-vps', disabled: true },
+  {
+    to: '/dark-web',
+    label: 'Dark web monitoring',
+    icon: 'nav-dark-web',
+    disabled: true,
+  },
+  { to: '/billing', label: 'Billing', icon: 'nav-billing', disabled: true, chevron: true },
+  {
+    to: '/marketplace',
+    label: 'Marketplace',
+    icon: 'nav-marketplace',
+    disabled: true,
+    chevron: true,
+  },
 ]
 
 const WORKSHEET = [
@@ -23,6 +44,42 @@ const WORKSHEET = [
   { to: '/worksheet/ui', label: '04 UI' },
   { to: '/worksheet/rationale', label: '05 Rationale' },
 ]
+
+function NavIcon({ name }: { name: string }) {
+  return (
+    <span
+      className={styles.navIcon}
+      style={{
+        WebkitMaskImage: `url(/icons/${name}.svg)`,
+        maskImage: `url(/icons/${name}.svg)`,
+      }}
+      aria-hidden
+    />
+  )
+}
+
+function NavRowContent({
+  item,
+  badgeCount,
+}: {
+  item: NavItem
+  badgeCount: number
+}) {
+  return (
+    <>
+      <span className={styles.navStart}>
+        <NavIcon name={item.icon} />
+        <span className={styles.navLabel}>{item.label}</span>
+      </span>
+      <span className={styles.navEnd}>
+        {item.badge && badgeCount > 0 ? (
+          <span className={styles.badge}>{badgeCount}</span>
+        ) : null}
+        {item.chevron ? <NavIcon name="nav-chevron" /> : null}
+      </span>
+    </>
+  )
+}
 
 interface Props {
   open?: boolean
@@ -54,9 +111,9 @@ export function Sidebar({ open = false, onClose, hidden = false }: Props) {
 
       <nav className={styles.nav} aria-label="Main">
         {NAV.map((item) =>
-          item.disabled ? (
+          item.disabled || !item.to ? (
             <span key={item.label} className={styles.navDisabled}>
-              {item.label}
+              <NavRowContent item={item} badgeCount={badgeCount} />
             </span>
           ) : (
             <NavLink
@@ -68,17 +125,22 @@ export function Sidebar({ open = false, onClose, hidden = false }: Props) {
               }
               onClick={onClose}
             >
-              <span>{item.label}</span>
-              {item.to === '/actions' && badgeCount > 0 ? (
-                <span className={styles.badge}>{badgeCount}</span>
-              ) : null}
+              <NavRowContent item={item} badgeCount={badgeCount} />
             </NavLink>
           ),
         )}
       </nav>
 
       <div className={styles.footer}>
-        <span className={styles.navDisabled}>Account sharing</span>
+        <span className={styles.navDisabled}>
+          <NavRowContent
+            item={{
+              label: 'Account sharing',
+              icon: 'nav-account-sharing',
+            }}
+            badgeCount={0}
+          />
+        </span>
         <button
           type="button"
           className={styles.resetMobile}
