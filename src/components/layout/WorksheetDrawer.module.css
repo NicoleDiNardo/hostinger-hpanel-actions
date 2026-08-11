@@ -12,25 +12,28 @@
   right: 0;
   transform: translateY(-50%);
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  height: 40px;
-  padding: 0 10px 0 14px;
+  justify-content: center;
+  gap: 10px;
+  width: 36px;
+  height: auto;
+  max-height: min(280px, 60vh);
+  padding: 16px 8px;
   border-radius: 12px 0 0 12px;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-right: none;
   box-shadow: -4px 0 16px rgba(29, 30, 32, 0.08);
   color: #6d7081;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   transition:
     background 0.15s ease,
-    color 0.15s ease;
-  writing-mode: horizontal-tb;
-  max-width: 180px;
+    color 0.15s ease,
+    right 0.22s ease;
 }
 
 .tab:hover {
@@ -39,15 +42,20 @@
 }
 
 .tabLabel {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
   white-space: nowrap;
+  line-height: 1.2;
 }
 
 .tabChevron {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   display: block;
   transform: rotate(180deg);
   opacity: 0.7;
+  flex-shrink: 0;
   transition: transform 0.2s ease;
 }
 
@@ -256,9 +264,10 @@
 @media (max-width: 900px) {
   .tab {
     top: auto;
-    bottom: 20px;
+    bottom: 16px;
     transform: none;
     right: 0;
+    max-height: 220px;
   }
 
   .open .tab {
