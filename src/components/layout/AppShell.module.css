@@ -1,5 +1,6 @@
 .shell {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   height: 100dvh;
   max-height: 100dvh;
@@ -7,22 +8,24 @@
   overflow: hidden;
 }
 
-.main {
+.body {
   flex: 1;
-  min-width: 0;
   min-height: 0;
   display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
 
 .content {
   flex: 1;
+  min-width: 0;
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   padding: 32px 40px 64px;
+}
+
+.contentInner {
   max-width: 1180px;
   width: 100%;
   margin: 0 auto;
@@ -33,15 +36,8 @@
 }
 
 @media (max-width: 900px) {
-  .shell {
-    flex-direction: column;
-    height: 100dvh;
-    max-height: 100dvh;
-  }
-
-  .main {
-    min-height: 0;
-    flex: 1;
+  .body {
+    position: relative;
   }
 
   .content {

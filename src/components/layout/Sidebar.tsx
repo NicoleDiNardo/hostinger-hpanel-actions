@@ -45,14 +45,14 @@ const WORKSHEET = [
   { to: '/worksheet/rationale', label: '05 Rationale' },
 ]
 
-function NavIcon({ name }: { name: string }) {
+function NavIcon({ name, chevron = false }: { name: string; chevron?: boolean }) {
   return (
-    <span
-      className={styles.navIcon}
-      style={{
-        WebkitMaskImage: `url(/icons/${name}.svg)`,
-        maskImage: `url(/icons/${name}.svg)`,
-      }}
+    <img
+      className={chevron ? styles.navChevron : styles.navIcon}
+      src={`/icons/${name}.svg`}
+      alt=""
+      width={chevron ? 16 : 24}
+      height={chevron ? 16 : 24}
       aria-hidden
     />
   )
@@ -75,7 +75,7 @@ function NavRowContent({
         {item.badge && badgeCount > 0 ? (
           <span className={styles.badge}>{badgeCount}</span>
         ) : null}
-        {item.chevron ? <NavIcon name="nav-chevron" /> : null}
+        {item.chevron ? <NavIcon name="nav-chevron" chevron /> : null}
       </span>
     </>
   )

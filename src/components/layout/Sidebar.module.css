@@ -65,20 +65,15 @@
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  display: inline-block;
-  background-color: currentColor;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
+  display: block;
 }
 
-.navEnd .navIcon {
+.navChevron {
   width: 16px;
   height: 16px;
-  color: #6d7081;
+  flex-shrink: 0;
+  display: block;
+  opacity: 0.55;
 }
 
 .navLink:hover,
