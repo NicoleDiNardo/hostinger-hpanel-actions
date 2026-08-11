@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { GROUP_ORDER, SITES } from '../data/actions'
 import { useActions } from '../context/ActionsContext'
 import { ActionCard } from '../components/actions/ActionCard'
@@ -15,10 +16,47 @@ const FILTER_TITLE: Record<ActionFilter, string> = {
   offers: 'Offers',
 }
 
+const FILTER_IDS = Object.keys(FILTER_TITLE) as ActionFilter[]
+
+function parseFilter(raw: string | null): ActionFilter {
+  if (raw && FILTER_IDS.includes(raw as ActionFilter)) return raw as ActionFilter
+  return 'all'
+}
+
+function parseSite(raw: string | null): string {
+  if (raw && SITES.includes(raw)) return raw
+  return 'All sites'
+}
+
 export function ActionCentre() {
-  const { activeActions, filterActions, badgeCount } = useActions()
-  const [filter, setFilter] = useState<ActionFilter>('all')
-  const [site, setSite] = useState('All sites')
+  const { activeActions, filterActions, badgeCount, journey } = useActions()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [filter, setFilter] = useState<ActionFilter>(() =>
+    parseFilter(searchParams.get('filter')),
+  )
+  const [site, setSite] = useState(() => parseSite(searchParams.get('site')))
+
+  // Journey presets / deep links can change the URL or inventory
+  useEffect(() => {
+    setFilter(parseFilter(searchParams.get('filter')))
+    setSite(parseSite(searchParams.get('site')))
+  }, [searchParams, journey])
+
+  const setFilterAndUrl = (next: ActionFilter) => {
+    setFilter(next)
+    const params = new URLSearchParams(searchParams)
+    if (next === 'all') params.delete('filter')
+    else params.set('filter', next)
+    setSearchParams(params, { replace: true })
+  }
+
+  const setSiteAndUrl = (next: string) => {
+    setSite(next)
+    const params = new URLSearchParams(searchParams)
+    if (next === 'All sites') params.delete('site')
+    else params.set('site', next)
+    setSearchParams(params, { replace: true })
+  }
 
   const visible = filterActions(filter, site)
 
@@ -64,14 +102,14 @@ export function ActionCentre() {
       </div>
 
       <div className={styles.toolbar}>
-        <Filters value={filter} onChange={setFilter} />
+        <Filters value={filter} onChange={setFilterAndUrl} />
         <label className={styles.siteFilter}>
           <span className={styles.siteLabel}>Site</span>
           <span className={styles.siteSelectWrap}>
             <select
               className={styles.siteSelect}
               value={site}
-              onChange={(e) => setSite(e.target.value)}
+              onChange={(e) => setSiteAndUrl(e.target.value)}
             >
               {SITES.map((s) => (
                 <option key={s} value={s}>

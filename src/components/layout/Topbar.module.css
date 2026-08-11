@@ -125,6 +125,41 @@
   min-width: 0;
 }
 
+.journeys {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.journeyBtn {
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #6d7081;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.journeyBtn:hover {
+  color: #18181a;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.journeyBtnActive {
+  background: #fff;
+  color: #18181a;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
 .ghost {
   font-size: 13px;
   font-weight: 600;

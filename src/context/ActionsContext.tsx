@@ -14,17 +14,44 @@ import {
   type PriorityTier,
 } from '../lib/priority'
 
+/** Demo start states matching Figma journeys A / B / C */
+export type DemoJourney = 'A' | 'B' | 'C'
+
+function cloneInitial(): PanelAction[] {
+  return INITIAL_ACTIONS.map((a) => ({ ...a }))
+}
+
+/** A = full inventory · B = Access-only (B1) · C = after email snooze (C1) */
+export function actionsForJourney(journey: DemoJourney): PanelAction[] {
+  const base = cloneInitial()
+  if (journey === 'A') return base
+  if (journey === 'B') {
+    return base.map((a) =>
+      a.nudgeType === 'requested_access'
+        ? { ...a, status: 'active' as const }
+        : { ...a, status: 'dismissed' as const },
+    )
+  }
+  return base.map((a) =>
+    a.nudgeType === 'email_plan_expiring'
+      ? { ...a, status: 'snoozed' as const }
+      : a,
+  )
+}
+
 interface ActionsContextValue {
   actions: PanelAction[]
   activeActions: PanelAction[]
   criticalHomeActions: PanelAction[]
   badgeCount: number
   toast: string | null
+  journey: DemoJourney
   dismiss: (id: string) => void
   snooze: (id: string) => void
   runCta: (action: PanelAction) => void
   clearToast: () => void
   resetDemo: () => void
+  loadJourney: (journey: DemoJourney) => void
   filterActions: (filter: ActionFilter, site: string) => PanelAction[]
 }
 
@@ -43,6 +70,7 @@ function sortActions(list: PanelAction[]): PanelAction[] {
 export function ActionsProvider({ children }: { children: ReactNode }) {
   const [actions, setActions] = useState<PanelAction[]>(INITIAL_ACTIONS)
   const [toast, setToast] = useState<string | null>(null)
+  const [journey, setJourney] = useState<DemoJourney>('A')
 
   const activeActions = useMemo(
     () => sortActions(actions.filter((a) => a.status === 'active')),
@@ -107,10 +135,19 @@ export function ActionsProvider({ children }: { children: ReactNode }) {
 
   const clearToast = useCallback(() => setToast(null), [])
 
-  const resetDemo = useCallback(() => {
-    setActions(INITIAL_ACTIONS)
-    setToast(null)
+  const loadJourney = useCallback((next: DemoJourney) => {
+    setJourney(next)
+    setActions(actionsForJourney(next))
+    if (next === 'C') {
+      setToast('Snoozed for 7 days · Business Starter Email')
+    } else {
+      setToast(null)
+    }
   }, [])
+
+  const resetDemo = useCallback(() => {
+    loadJourney('A')
+  }, [loadJourney])
 
   const filterActions = useCallback(
     (filter: ActionFilter, site: string) => {
@@ -133,11 +170,13 @@ export function ActionsProvider({ children }: { children: ReactNode }) {
     criticalHomeActions,
     badgeCount,
     toast,
+    journey,
     dismiss,
     snooze,
     runCta,
     clearToast,
     resetDemo,
+    loadJourney,
     filterActions,
   }
 

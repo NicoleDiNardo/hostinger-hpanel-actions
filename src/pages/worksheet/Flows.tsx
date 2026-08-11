@@ -45,9 +45,12 @@ export function WorksheetFlows() {
       <section className={styles.card}>
         <h2>Try it in the prototype</h2>
         <p>
-          Open <Link to="/">Home</Link>, then <Link to="/actions">Actions</Link>.
-          Dismiss or snooze items and watch the badge update. Use <strong>Reset demo</strong> in
-          the top bar anytime.
+          Use the top-bar journey presets: <strong>A</strong> full Home inventory,{' '}
+          <strong>B</strong> Access-only Home, <strong>C</strong> after snooze in Actions.
+          From C, try{' '}
+          <Link to="/actions?filter=offers">Offers filter</Link> or{' '}
+          <Link to="/actions?site=studio-bloom.com">studio-bloom site focus</Link>.{' '}
+          <strong>Reset demo</strong> returns to A anytime.
         </p>
       </section>
 
