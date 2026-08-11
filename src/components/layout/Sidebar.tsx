@@ -37,14 +37,6 @@ const NAV: NavItem[] = [
   },
 ]
 
-const WORKSHEET = [
-  { to: '/worksheet', label: '01 Framing', end: true },
-  { to: '/worksheet/model', label: '02 Priority model' },
-  { to: '/worksheet/flows', label: '03 Flows' },
-  { to: '/worksheet/ui', label: '04 UI' },
-  { to: '/worksheet/rationale', label: '05 Rationale' },
-]
-
 function NavIcon({ name, chevron = false }: { name: string; chevron?: boolean }) {
   return (
     <img
@@ -151,25 +143,6 @@ export function Sidebar({ open = false, onClose, hidden = false }: Props) {
         >
           Reset demo
         </button>
-      </div>
-
-      <div className={styles.worksheet}>
-        <p className={styles.worksheetLabel}>Design worksheet</p>
-        {WORKSHEET.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            end={item.end}
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.worksheetLink} ${styles.active}`
-                : styles.worksheetLink
-            }
-            onClick={onClose}
-          >
-            {item.label}
-          </NavLink>
-        ))}
       </div>
     </aside>
   )
