@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import {
+  useActions,
+  type DemoJourney,
+} from '../../context/ActionsContext'
 import styles from './WorksheetDrawer.module.css'
 
 const WORKSHEET = [
@@ -10,8 +14,16 @@ const WORKSHEET = [
   { to: '/worksheet/rationale', label: '05 Rationale' },
 ]
 
+const JOURNEYS: { id: DemoJourney; label: string; blurb: string }[] = [
+  { id: 'A', label: 'A · Clear Criticals', blurb: 'Full Home inventory' },
+  { id: 'B', label: 'B · Access pending', blurb: 'Home · badge 1' },
+  { id: 'C', label: 'C · After snooze', blurb: 'Action Centre' },
+]
+
 export function WorksheetDrawer() {
   const location = useLocation()
+  const navigate = useNavigate()
+  const { loadJourney, journey, resetDemo } = useActions()
   const onWorksheet = location.pathname.startsWith('/worksheet')
   const [open, setOpen] = useState(onWorksheet)
 
@@ -27,6 +39,12 @@ export function WorksheetDrawer() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
+
+  const goJourney = (next: DemoJourney) => {
+    loadJourney(next)
+    navigate(next === 'C' ? '/actions' : '/')
+    setOpen(false)
+  }
 
   return (
     <div className={`${styles.wrap} ${open ? styles.open : ''}`}>
@@ -77,7 +95,41 @@ export function WorksheetDrawer() {
           </button>
         </div>
 
+        <section className={styles.section}>
+          <p className={styles.sectionLabel}>Demo journeys</p>
+          <div className={styles.journeys} role="group" aria-label="Demo journey">
+            {JOURNEYS.map((j) => (
+              <button
+                key={j.id}
+                type="button"
+                className={
+                  journey === j.id
+                    ? `${styles.journey} ${styles.journeyActive}`
+                    : styles.journey
+                }
+                aria-pressed={journey === j.id}
+                onClick={() => goJourney(j.id)}
+              >
+                <span className={styles.journeyTitle}>{j.label}</span>
+                <span className={styles.journeyBlurb}>{j.blurb}</span>
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            className={styles.reset}
+            onClick={() => {
+              resetDemo()
+              navigate('/')
+              setOpen(false)
+            }}
+          >
+            Reset demo
+          </button>
+        </section>
+
         <nav className={styles.nav} aria-label="Design worksheet">
+          <p className={styles.sectionLabel}>Boards</p>
           {WORKSHEET.map((item) => (
             <NavLink
               key={item.to}

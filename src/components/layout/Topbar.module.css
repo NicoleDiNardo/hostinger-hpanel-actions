@@ -2,10 +2,10 @@
   --topbar-pad-x: 32px;
   min-height: var(--topbar-h);
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  column-gap: 24px;
   padding: 12px var(--topbar-pad-x);
   background: var(--white);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -14,11 +14,11 @@
 }
 
 .left {
-  flex: 1;
   min-width: 0;
   display: flex;
   align-items: center;
   gap: 8px;
+  justify-self: start;
 }
 
 .menuBtn {
@@ -79,7 +79,7 @@
 
 .search {
   width: 400px;
-  max-width: min(400px, 40vw);
+  max-width: min(400px, 42vw);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -90,7 +90,8 @@
   background: #fff;
   color: #58585e;
   font-size: 14px;
-  flex-shrink: 1;
+  justify-self: center;
+  min-width: 0;
 }
 
 .searchIcon {
@@ -98,10 +99,15 @@
   height: 24px;
   display: block;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .searchPlaceholder {
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .kbd {
@@ -111,65 +117,16 @@
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.05);
   color: #58585e;
+  flex-shrink: 0;
 }
 
 .right {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
-  flex-shrink: 0;
   min-width: 0;
-}
-
-.journeys {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  padding: 3px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.05);
-  flex-shrink: 0;
-}
-
-.journeyBtn {
-  min-width: 28px;
-  height: 28px;
-  padding: 0 8px;
-  border-radius: 7px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #6d7081;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
-}
-
-.journeyBtn:hover {
-  color: #18181a;
-  background: rgba(255, 255, 255, 0.55);
-}
-
-.journeyBtnActive {
-  background: #fff;
-  color: #18181a;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
-}
-
-.ghost {
-  font-size: 13px;
-  font-weight: 600;
-  color: #6d7081;
-  padding: 8px 10px;
-  border-radius: 8px;
-  transition: background 0.15s ease;
-  white-space: nowrap;
-}
-
-.ghost:hover {
-  background: rgba(0, 0, 0, 0.05);
+  justify-self: end;
 }
 
 .refer {
@@ -192,6 +149,7 @@
   height: 16px;
   display: block;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .refer:hover {
@@ -218,6 +176,7 @@
   height: 20px;
   display: block;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .ai:hover {
@@ -247,18 +206,24 @@
   width: 24px;
   height: 24px;
   display: block;
+  object-fit: contain;
 }
 
 @media (max-width: 1100px) {
   .refer {
     display: none;
   }
+
+  .search {
+    width: 320px;
+  }
 }
 
 @media (max-width: 900px) {
   .topbar {
     --topbar-pad-x: 12px;
-    gap: 12px;
+    grid-template-columns: 1fr auto;
+    column-gap: 12px;
     padding-top: 8px;
     padding-bottom: 8px;
     min-height: 56px;
@@ -276,12 +241,12 @@
     display: none;
   }
 
-  .ghost {
+  .ai {
     display: none;
   }
 
-  .ai {
-    display: none;
+  .right {
+    grid-column: 2;
   }
 }
 
