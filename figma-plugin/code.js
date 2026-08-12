@@ -314,7 +314,7 @@ async function main() {
     h.layoutAlign = 'STRETCH';
     f.appendChild(h);
     const d = text(
-      'The brief hypothesizes a notification centre. We kept a dedicated centre, but rejected the inbox metaphor because most items are tasks with outcomes.',
+      'The brief hypothesizes a notification centre. I kept a dedicated centre, but rejected the inbox metaphor because most items are tasks with outcomes.',
       16,
       'Regular',
       '#727586'
@@ -340,7 +340,7 @@ async function main() {
       ], 494)
     );
     row.appendChild(
-      card('What we cut', [
+      card('What I cut', [
         '• Mobile-first layouts (desktop proof first)',
         '• Per-nudge bespoke layouts for all 53 types',
         '• Real billing / auth integrations',

@@ -7,7 +7,7 @@ export function WorksheetRationale() {
       <p className={styles.kicker}>05 · Rationale</p>
       <h1>Why Actions — not a notification centre</h1>
       <p className={styles.deck}>
-        The brief hypothesizes a notification centre. We kept a dedicated centre, but
+        The brief hypothesizes a notification centre. I kept a dedicated centre, but
         rejected the inbox metaphor because most items are tasks with outcomes.
       </p>
 
@@ -33,7 +33,7 @@ export function WorksheetRationale() {
           </ul>
         </section>
         <section className={styles.card}>
-          <h2>What we cut</h2>
+          <h2>What I cut</h2>
           <ul>
             <li>Mobile-first layouts (desktop proof first)</li>
             <li>Per-nudge bespoke layouts for all 53 types</li>
